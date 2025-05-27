@@ -1,3 +1,16 @@
+core.*
+.vscode
+.tmp
+selfplay.txt
+selfplay*.txt
+tune*.txt
+piece_squares*.txt
+nnue-chess
+perf.data
+data*.txt
+
+*.sh
+
 # Prerequisites
 *.d
 
