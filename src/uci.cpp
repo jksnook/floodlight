@@ -7,7 +7,7 @@
 
 namespace Spotlight {
 
-UCI::UCI() :  position(), search_threads(1) {}
+UCI::UCI() : position(), search_threads(1) {}
 
 void UCI::loop() {
     std::string line;
@@ -158,7 +158,8 @@ void UCI::parseGo(std::istringstream& commands) {
         std::chrono::duration<double> duration = end - start;
         U64 nps = node_count / duration.count();
 
-        std::cout << node_count << " nodes searched in " << duration.count() << "s " << nps << " nps\n";
+        std::cout << node_count << " nodes searched in " << duration.count() << "s " << nps
+                  << " nps\n";
 
     } else if (token == "nodes") {
         token.clear();
@@ -177,7 +178,8 @@ void UCI::parseGo(std::istringstream& commands) {
         std::chrono::duration<double> duration = end - start;
         U64 nps = node_count / duration.count();
 
-        std::cout << node_count << " nodes searched in " << duration.count() << "s " << nps << " nps\n";
+        std::cout << node_count << " nodes searched in " << duration.count() << "s " << nps
+                  << " nps\n";
     } else if (token == "infinite") {
         search_threads.infiniteSearch(position);
     } else if (token == "movetime") {

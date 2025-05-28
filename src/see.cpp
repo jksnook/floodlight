@@ -10,11 +10,11 @@ BitBoard getAttackersTo(Position &pos, int sq, BitBoard occupancy) {
             (pawn_attacks[BLACK][sq] & pos.bitboards[WHITE_PAWN]) |
             (pawn_attacks[WHITE][sq] & pos.bitboards[BLACK_PAWN]) |
             (getMagicBishopAttack(sq, occupancy) &
-                (pos.bitboards[WHITE_BISHOP] | pos.bitboards[WHITE_QUEEN] |
-                 pos.bitboards[BLACK_BISHOP] | pos.bitboards[BLACK_QUEEN])) |
+             (pos.bitboards[WHITE_BISHOP] | pos.bitboards[WHITE_QUEEN] |
+              pos.bitboards[BLACK_BISHOP] | pos.bitboards[BLACK_QUEEN])) |
             (getMagicRookAttack(sq, occupancy) &
-                (pos.bitboards[WHITE_ROOK] | pos.bitboards[WHITE_QUEEN] |
-                 pos.bitboards[BLACK_ROOK] | pos.bitboards[BLACK_QUEEN])) |
+             (pos.bitboards[WHITE_ROOK] | pos.bitboards[WHITE_QUEEN] | pos.bitboards[BLACK_ROOK] |
+              pos.bitboards[BLACK_QUEEN])) |
             (king_moves[sq] & (pos.bitboards[WHITE_KING] | pos.bitboards[BLACK_KING]))) &
            occupancy;
 }

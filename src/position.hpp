@@ -35,6 +35,7 @@ class Position {
    public:
     Position();
     BitBoard bitboards[15];
+    Piece board[64];
     int castle_rights;
     Color side_to_move;
     Square en_passant;
@@ -74,7 +75,6 @@ class Position {
     inline Piece at(Square sq) { return board[sq]; };
 
    private:
-    Piece board[64];
 };
 
 }  // namespace Spotlight

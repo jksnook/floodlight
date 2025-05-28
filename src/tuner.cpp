@@ -2,11 +2,13 @@
 
 #include <algorithm>
 #include <cmath>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 
+#include "datagen.hpp"
 #include "eval.hpp"
 #include "position.hpp"
 
@@ -20,36 +22,47 @@ namespace Spotlight {
 Tuner::Tuner() : weights{}, gradient{} {
     std::ifstream fen_file;
     std::string line;
-    Position pos;
 
-    fen_file.open(TUNING_FILE);
-    int positions_loaded = 0;
+    fen_file.open(TUNING_FILE, std::ios::in | std::ios::binary);
+    U64 positions_loaded = 0;
 
-    while (positions_loaded < MAX_POSITIONS && std::getline(fen_file, line)) {
+    auto file_length = std::filesystem::file_size(TUNING_FILE);
+
+    std::cout << "File Size: " << file_length << "\n";
+
+    assert(file_length != 0);
+
+    size_t length_to_read = std::min(file_length, MAX_POSITIONS * sizeof(DataEntry));
+
+    assert(length_to_read != 0);
+
+    std::vector<DataEntry> positions(length_to_read / sizeof(DataEntry));
+
+    fen_file.read(reinterpret_cast<char *>(positions.data()), length_to_read);
+
+    assert(positions.size() != 0);
+
+    for (auto &input_entry : positions) {
         PositionData entry;
-        std::string outcome;
-        std::string fen;
 
-        std::size_t start_of_outcome = line.find_last_of(' ') + 1;
-        std::size_t end_of_outcome = line.find_last_not_of(" \t\n\r");
+        Color side = static_cast<Color>(input_entry.side);
 
-        fen = line.substr(0, start_of_outcome - 1);
-        outcome = line.substr(start_of_outcome, end_of_outcome - start_of_outcome + 1);
+        int result = input_entry.result - side * 2;
 
-        if (outcome == "0" || outcome == "[0.0]") {
-            entry.result = 0.0;
-        } else if (outcome == "0.5" || outcome == "[0.5]") {
-            entry.result = 0.5;
-        } else if (outcome == "1" || outcome == "[1.0]") {
-            entry.result = 1.0;
+        switch (result) {
+            case 0:
+                entry.result = 0.0;
+                break;
+            case 1:
+                entry.result = 0.5;
+                break;
+            case 2:
+                entry.result = 1.0;
+                break;
+
+            default:
+                break;
         }
-
-        pos.readFen(fen);
-
-        /*
-        To make things easier I just copied my eval code to here. If I make my eval more complex
-        I will have to change this.
-        */
 
         int early_eval = 0;
         int late_eval = 0;
@@ -57,37 +70,47 @@ Tuner::Tuner() : weights{}, gradient{} {
         int game_phase = 0;
         std::array<std::array<int, 2>, NUM_PARAMS / 2> coeffs{};
 
-        for (int i = 0; i < 64; i++) {
-            Piece piece = pos.at(static_cast<Square>(i));
+        /*
+        To make things easier I just copied my eval code to here. If I make my eval more complex
+        I will have to change this.
+        */
 
-            if (piece != NO_PIECE) {
-                game_phase += phase_values[piece % 6];
-                int coeff_idx;
-                if (piece < BLACK_PAWN) {
-                    coeff_idx = getPieceType(piece) * 64 + (i ^ 56);
-                    coeffs[coeff_idx][WHITE]++;
-                    early_eval += piece_values[0][getPieceType(piece)] +
-                                  piece_square_tables[getPieceType(piece)][0][i ^ 56];
-                    late_eval += piece_values[1][getPieceType(piece)] +
-                                 piece_square_tables[getPieceType(piece)][1][i ^ 56];
-                } else {
-                    coeff_idx = getPieceType(piece) * 64 + i;
-                    coeffs[coeff_idx][BLACK]++;
-                    early_eval -= piece_values[0][getPieceType(piece)] +
-                                  piece_square_tables[getPieceType(piece)][0][i];
-                    late_eval -= piece_values[1][getPieceType(piece)] +
-                                 piece_square_tables[getPieceType(piece)][1][i];
-                }
+        int pieces_idx = 0;
+        BitBoard temp = input_entry.occupancy;
+        while (temp) {
+            int i = popLSB(temp);
+
+            Piece piece = static_cast<Piece>(
+                (input_entry.pieces[pieces_idx / 2] >> ((pieces_idx & 1) * 4)) & 0b1111);
+
+            game_phase += phase_values[piece % 6];
+            int coeff_idx;
+            if (piece < BLACK_PAWN) {
+                coeff_idx = getPieceType(piece) * 64 + (i ^ 56);
+                coeffs[coeff_idx][WHITE]++;
+                early_eval += piece_values[0][getPieceType(piece)] +
+                              piece_square_tables[getPieceType(piece)][0][i ^ 56];
+                late_eval += piece_values[1][getPieceType(piece)] +
+                             piece_square_tables[getPieceType(piece)][1][i ^ 56];
+            } else {
+                coeff_idx = getPieceType(piece) * 64 + i;
+                coeffs[coeff_idx][BLACK]++;
+                early_eval -= piece_values[0][getPieceType(piece)] +
+                              piece_square_tables[getPieceType(piece)][0][i];
+                late_eval -= piece_values[1][getPieceType(piece)] +
+                             piece_square_tables[getPieceType(piece)][1][i];
             }
+            pieces_idx++;
         }
 
         int total_eval =
             (early_eval * game_phase + late_eval * (TOTAL_PHASE - game_phase)) / TOTAL_PHASE;
 
-        entry.s_eval = eval(pos);
-        if (pos.side_to_move == BLACK) {
-            entry.s_eval *= -1;
+        if (side == BLACK) {
+            total_eval *= -1;
         }
+
+        entry.s_eval = total_eval;
         entry.d_eval = static_cast<double>(total_eval);
         entry.phase = game_phase;
 

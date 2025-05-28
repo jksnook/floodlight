@@ -1,8 +1,7 @@
 core.*
 .vscode
 .tmp
-selfplay.txt
-selfplay*.txt
+selfplay*
 tune*.txt
 piece_squares*.txt
 nnue-chess

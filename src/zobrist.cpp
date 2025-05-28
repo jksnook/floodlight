@@ -17,8 +17,7 @@ void initZobrist() {
     for (int i = 0; i < 64; i++) {
         en_passant_keys[i] = randomU64();
 
-        for (int piece = 0; piece < static_cast<int>(Piece::NO_PIECE);
-             piece++) {
+        for (int piece = 0; piece < static_cast<int>(Piece::NO_PIECE); piece++) {
             piece_keys[piece][i] = randomU64();
         }
 

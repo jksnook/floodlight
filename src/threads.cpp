@@ -63,7 +63,7 @@ void Threads::timeSearch(Position pos, U64 time) {
 void Threads::nodeSearch(Position pos, U64 nodes) {
     is_stopped.store(false);
 
-    for (int i = 0; i <static_cast<int>(workers.size()); i++) {
+    for (int i = 0; i < static_cast<int>(workers.size()); i++) {
         std::lock_guard lock(workers[i]->mx);
         workers[i]->pos = pos;
         workers[i]->node_search = true;

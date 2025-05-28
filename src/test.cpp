@@ -170,7 +170,6 @@ void testPerft() {
 }
 
 void testSearch() {
-
     Position pos;
     TT tt;
     std::atomic<bool> is_stopped(false);
