@@ -59,8 +59,8 @@ Tuner::Tuner() : weights{}, gradient{} {
             case 2:
                 entry.result = 1.0;
                 break;
-
             default:
+                entry.result = 0.0;
                 break;
         }
 
