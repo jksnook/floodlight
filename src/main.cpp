@@ -1,13 +1,13 @@
 #include "datagen.hpp"
 #include "eval.hpp"
 #include "move.hpp"
+#include "nnue.hpp"
 #include "position.hpp"
 #include "test.hpp"
 #include "tuner.hpp"
 #include "types.hpp"
 #include "uci.hpp"
 #include "zobrist.hpp"
-#include "nnue.hpp"
 
 using namespace Spotlight;
 
@@ -16,10 +16,7 @@ int main(int argc, char* argv[]) {
     initMagics();
     initZobrist();
 
-    NN nn;
-
-    nn.load();
-
+    NN::load();
 
     // if (argc == 1) {
     //     UCI uci;

@@ -1,10 +1,11 @@
 #pragma once
 
 #include <algorithm>
-#include <cmath>
 #include <array>
+#include <cmath>
 
 #include "incbin.h"
+#include "types.hpp"
 
 namespace Spotlight {
 
@@ -14,30 +15,23 @@ const int QA = 255;
 const int QB = 64;
 const int EVAL_SCALE = 400;
 
-// const size_t total_bytes = (INPUT_SIZE * HIDDEN_SIZE + HIDDEN_SIZE) * sizeof(int16_t) + (HIDDEN_SIZE + 1)* sizeof(int32_t);
+namespace NN {
 
-using Accumulator = std::array<std::array<int, 512>, 2>;
+struct Accumulator {
+    void addPiece(Square from_sq, Square to_sq);
 
-class NN {
-public:
+    void removePiece(Square from_sq, Square to_sq);
 
-  NN();
+    void movePiece(Square from_sq, Square to_sq);
 
-  inline int screlu(int input) { return std::pow(std::clamp(input, 0, QA), 2);}
-
-  int evaluate(Accumulator &acc);
-
-  void load();
-
-private:
-
-  std::array<std::array<int16_t, INPUT_SIZE>, HIDDEN_SIZE> hl_weights;
-
-  std::array<int16_t, HIDDEN_SIZE> hl_biases;
-
-  std::array<int32_t, HIDDEN_SIZE> output_weights;
-
-  int16_t output_bias;
+    std::array<int16_t, HIDDEN_SIZE> values;
 };
 
-}
+inline int screlu(int input) { return std::pow(std::clamp(input, 0, QA), 2); }
+
+int evaluate(Accumulator &acc);
+
+void load();
+};  // namespace NN
+
+}  // namespace Spotlight

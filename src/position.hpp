@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "nnue.hpp"
 #include "types.hpp"
 
 namespace Spotlight {
