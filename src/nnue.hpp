@@ -6,6 +6,7 @@
 
 #include "incbin.h"
 #include "types.hpp"
+#include "utils.hpp"
 
 namespace Spotlight {
 
@@ -17,21 +18,34 @@ const int EVAL_SCALE = 400;
 
 namespace NN {
 
+template <Color side>
+int getIndex(Piece piece, Square sq) {
+    if constexpr(side == WHITE) {
+        return piece * 64 + sq;
+    } else {
+        return (getPieceType(piece) + 6 * getOtherSide(getPieceColor(piece))) * 64 + (sq ^ 56);
+    }
+}
+
+
 struct Accumulator {
-    void addPiece(Square from_sq, Square to_sq);
+    void clear();
 
-    void removePiece(Square from_sq, Square to_sq);
+    void addPiece(Piece piece, Square sq);
 
-    void movePiece(Square from_sq, Square to_sq);
+    void removePiece(Piece piece, Square sq);
 
-    std::array<int16_t, HIDDEN_SIZE> values;
+    void movePiece(Piece piece, Square from_sq, Square to_sq);
+
+    std::array<std::array<int16_t, HIDDEN_SIZE>, 2> values;
 };
+
+void load();
 
 inline int screlu(int input) { return std::pow(std::clamp(input, 0, QA), 2); }
 
 int evaluate(Accumulator &acc);
 
-void load();
 };  // namespace NN
 
 }  // namespace Spotlight

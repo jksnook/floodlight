@@ -626,4 +626,17 @@ bool Position::zugzwangUnlikely() {
     return false;
 }
 
+void Position::refreshAcc(NN::Accumulator &acc) {
+
+    acc.clear();
+
+    for (int i = 0; i < 64; i++) {
+        Square sq = static_cast<Square>(i);
+        Piece p = at(sq);
+        if (p == NO_PIECE) continue;
+        // std::cout << NN::getIndex<BLACK>(p, sq) << "\n";
+        acc.addPiece(p, sq);
+    }
+}
+
 }  // namespace Spotlight

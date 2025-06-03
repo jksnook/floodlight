@@ -18,6 +18,28 @@ int main(int argc, char* argv[]) {
 
     NN::load();
 
+    Position pos;
+
+    NN::Accumulator acc;
+
+    pos.refreshAcc(acc);
+
+    for (int i = 0; i < 16; i++) {
+        std::cout << acc.values[WHITE][i] << "\n";
+        std::cout << acc.values[BLACK][i] << "\n";
+    }
+
+    pos.readFen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - ");
+
+    std::cout << "kiwipete: \n";
+
+    pos.refreshAcc(acc);
+
+    for (int i = 0; i < 16; i++) {
+        std::cout << acc.values[WHITE][i] << "\n";
+        std::cout << acc.values[BLACK][i] << "\n";
+    }
+
     // if (argc == 1) {
     //     UCI uci;
     //     uci.loop();

@@ -75,6 +75,8 @@ class Position {
 
     inline Piece at(Square sq) { return board[sq]; };
 
+    void refreshAcc(NN::Accumulator &acc);
+
    private:
 };
 
