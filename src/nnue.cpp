@@ -16,18 +16,9 @@ std::array<std::array<int16_t, HIDDEN_SIZE>, INPUT_SIZE> hl_weights;
 
 std::array<int16_t, HIDDEN_SIZE> hl_biases;
 
-std::array<int32_t, HIDDEN_SIZE> output_weights;
+std::array<int16_t, HIDDEN_SIZE * 2> output_weights;
 
 int16_t output_bias = 0;
-
-// template <Color side>
-// int getIndex(Piece piece, Square sq) {
-//     if constexpr(side == WHITE) {
-//         return piece * 64 + sq;
-//     } else {
-//         return (getPieceType(piece) + 6 * getOtherSide(getPieceColor(piece))) * 64 + (sq ^ 56);
-//     }
-// }
 
 void Accumulator::clear() {
 
@@ -94,7 +85,7 @@ void load() {
     std::memcpy(hl_biases.data(), &gIncludedNetworkData[mem_index], hl_biases_bytes);
     mem_index += hl_biases_bytes;
 
-    size_t output_weights_bytes = HIDDEN_SIZE * sizeof(int32_t);
+    size_t output_weights_bytes = HIDDEN_SIZE * 2 * sizeof(int16_t);
     std::memcpy(output_weights.data(), &gIncludedNetworkData[mem_index], output_weights_bytes);
     mem_index += output_weights_bytes;
 
@@ -103,8 +94,28 @@ void load() {
     std::cout << hl_biases[0] << " " << hl_biases[1] << " " << output_bias << std::endl;
 }
 
-int evaluate(Accumulator &acc) {
-    
+int evaluate(Accumulator &acc, Color side) {
+
+    int32_t output = 0;
+
+    Color other_side = getOtherSide(side);
+
+    for (int i = 0; i < HIDDEN_SIZE; i++) {
+        output += screlu(acc.values[side][i]) * output_weights[i] / QA;
+        output += screlu(acc.values[other_side][i]) * output_weights[HIDDEN_SIZE + i] / QA;
+    }
+
+    std::cout << output << "\n";
+
+    output += output_bias;
+
+    output *= EVAL_SCALE;
+
+    output /= QA * QB;
+
+    std::cout << output << "\n";
+
+    return output;
 }
 
 }  // namespace NN

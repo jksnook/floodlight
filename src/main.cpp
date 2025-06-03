@@ -24,10 +24,12 @@ int main(int argc, char* argv[]) {
 
     pos.refreshAcc(acc);
 
-    for (int i = 0; i < 16; i++) {
-        std::cout << acc.values[WHITE][i] << "\n";
-        std::cout << acc.values[BLACK][i] << "\n";
-    }
+    // for (int i = 0; i < 16; i++) {
+    //     std::cout << acc.values[WHITE][i] << "\n";
+    //     std::cout << acc.values[BLACK][i] << "\n";
+    // }
+
+    NN::evaluate(acc, WHITE);
 
     pos.readFen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - ");
 
@@ -35,10 +37,12 @@ int main(int argc, char* argv[]) {
 
     pos.refreshAcc(acc);
 
-    for (int i = 0; i < 16; i++) {
-        std::cout << acc.values[WHITE][i] << "\n";
-        std::cout << acc.values[BLACK][i] << "\n";
-    }
+    // for (int i = 0; i < 16; i++) {
+    //     std::cout << acc.values[WHITE][i] << "\n";
+    //     std::cout << acc.values[BLACK][i] << "\n";
+    // }
+
+    NN::evaluate(acc, WHITE);
 
     // if (argc == 1) {
     //     UCI uci;
