@@ -40,7 +40,7 @@ int eval(Position &pos) {
         total_eval *= -1;
     }
 
-    // return total_eval;
+    return total_eval;
 }
 
 }  // namespace Spotlight

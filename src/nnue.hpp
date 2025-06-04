@@ -12,8 +12,8 @@ namespace Spotlight {
 
 const int INPUT_SIZE = 768;
 const int HIDDEN_SIZE = 64;
-const int32_t QA = 255;
-const int32_t QB = 64;
+const int16_t QA = 255;
+const int16_t QB = 64;
 const int32_t EVAL_SCALE = 400;
 
 namespace NN {
@@ -42,7 +42,7 @@ struct Accumulator {
 
 void load();
 
-inline int screlu(int input) { return std::pow(std::clamp(input, 0, QA), 2); }
+inline int32_t screlu(int16_t input) { return std::pow(std::clamp(input, int16_t(0), QA), 2); }
 
 int evaluate(Accumulator &acc, Color side);
 

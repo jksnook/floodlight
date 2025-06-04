@@ -101,11 +101,13 @@ int evaluate(Accumulator &acc, Color side) {
     Color other_side = getOtherSide(side);
 
     for (int i = 0; i < HIDDEN_SIZE; i++) {
-        output += screlu(acc.values[side][i]) * output_weights[i] / QA;
-        output += screlu(acc.values[other_side][i]) * output_weights[HIDDEN_SIZE + i] / QA;
+        output += screlu(acc.values[side][i]) * output_weights[i];
+        output += screlu(acc.values[other_side][i]) * output_weights[HIDDEN_SIZE + i];
     }
 
     // std::cout << output << "\n";
+
+    output /= QA;
 
     output += output_bias;
 

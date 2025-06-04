@@ -2,7 +2,7 @@ CXX := g++
 TARGET := nnue-chess
 TMPDIR := .tmp
 
-CXXFLAGS := -std=c++23 -O3
+CXXFLAGS := -std=c++23 -O3 -march=native
 NAME := nnue-chess
 
 SOURCES := $(wildcard src/*.cpp)
