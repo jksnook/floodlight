@@ -11,6 +11,7 @@
 #include "search.hpp"
 #include "see.hpp"
 #include "utils.hpp"
+#include "nnue.hpp"
 
 namespace Spotlight {
 
@@ -44,6 +45,7 @@ void runTests() {
     // testMoveVerification();
     // testMovePicker();
     // testSee();
+    testNN();
     testPerft();
     // testCheck();
 
@@ -325,6 +327,22 @@ void testMoveVerification() {
     int n = testLegalPerft(pos, 1);
     std::cout << n << " nodes\n";
     assert(n == 48);
+}
+
+void testNN() {
+    Position pos;
+
+    NN::Accumulator acc;
+
+    pos.refreshAcc(acc);
+
+    assert(NN::evaluate(acc, WHITE) == 58);
+
+    pos.readFen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - ");
+    
+    pos.refreshAcc(acc);
+
+    assert(NN::evaluate(acc, WHITE) == -136);
 }
 
 }  // namespace Spotlight

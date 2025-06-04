@@ -28,4 +28,6 @@ U64 testLegalPerftHelper(Position &pos, int depth);
 
 void testMoveVerification();
 
+void testNN();
+
 }  // namespace Spotlight

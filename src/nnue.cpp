@@ -91,7 +91,7 @@ void load() {
 
     std::memcpy(&output_bias, &gIncludedNetworkData[mem_index], sizeof(int16_t));
 
-    std::cout << hl_biases[0] << " " << hl_biases[1] << " " << output_bias << std::endl;
+    // std::cout << hl_biases[0] << " " << hl_biases[1] << " " << output_bias << std::endl;
 }
 
 int evaluate(Accumulator &acc, Color side) {
