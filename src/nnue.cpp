@@ -107,9 +107,9 @@ int evaluate(Accumulator &acc, Color side) {
 
     // std::cout << output << "\n";
 
-    output /= QA;
-
     output += output_bias;
+
+    output /= QA;
 
     output *= EVAL_SCALE;
 
