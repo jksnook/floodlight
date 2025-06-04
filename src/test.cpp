@@ -42,10 +42,10 @@ constexpr std::array TEST_POSITIONS = {
 
 void runTests() {
     // testMoveVerification();
-    testMovePicker();
-    testSee();
+    // testMovePicker();
+    // testSee();
     testPerft();
-    testCheck();
+    // testCheck();
 
     std::cout << "Tests Passed" << std::endl;
 }

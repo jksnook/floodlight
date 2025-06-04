@@ -105,7 +105,7 @@ int evaluate(Accumulator &acc, Color side) {
         output += screlu(acc.values[other_side][i]) * output_weights[HIDDEN_SIZE + i] / QA;
     }
 
-    std::cout << output << "\n";
+    // std::cout << output << "\n";
 
     output += output_bias;
 
@@ -113,7 +113,7 @@ int evaluate(Accumulator &acc, Color side) {
 
     output /= QA * QB;
 
-    std::cout << output << "\n";
+    // std::cout << output << "\n";
 
     return output;
 }

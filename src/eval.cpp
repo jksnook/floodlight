@@ -5,6 +5,9 @@
 namespace Spotlight {
 
 int eval(Position &pos) {
+
+    // return NN::evaluate(pos.accumulators.back(), pos.side_to_move);
+
     int early_eval = 0;
     int late_eval = 0;
     int game_phase = 0;
@@ -37,7 +40,7 @@ int eval(Position &pos) {
         total_eval *= -1;
     }
 
-    return total_eval;
+    // return total_eval;
 }
 
 }  // namespace Spotlight

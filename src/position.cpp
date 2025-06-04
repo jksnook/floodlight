@@ -26,6 +26,8 @@ void Position::movePiece(Square start, Square end, Piece piece) {
 
     board[start] = Piece::NO_PIECE;
     board[end] = piece;
+
+    accumulators.back().movePiece(piece, start, end);
 }
 
 template <bool update_zobrist>
@@ -37,6 +39,8 @@ void Position::removePiece(Square square, Piece piece) {
     bitboards[OCCUPANCY] &= ~setBit(square);
 
     board[square] = Piece::NO_PIECE;
+
+    accumulators.back().removePiece(piece, square);
 }
 
 template <bool update_zobrist>
@@ -47,6 +51,8 @@ void Position::placePiece(Square square, Piece piece) {
     bitboards[OCCUPANCY] ^= setBit(square);
 
     board[square] = piece;
+
+    accumulators.back().addPiece(piece, square);
 }
 
 MoveGenData::MoveGenData()
@@ -143,6 +149,10 @@ void Position::readFen(std::string fen) {
     game_half_moves = half_moves;
 
     z_key = generateZobrist();
+
+    accumulators.clear();
+    accumulators.push_back(NN::Accumulator());
+    refreshAcc(accumulators.back());
 }
 
 std::string Position::toFen() {
@@ -274,6 +284,8 @@ void Position::makeMove(move16 move) {
     Piece piece = at(start_square);
 
     assert(piece != NO_PIECE);
+
+    accumulators.push_back(accumulators.back());
 
     Undo undo;
     undo.movegen_data = movegen_data;
@@ -505,6 +517,7 @@ void Position::unmakeMove() {
 
     z_key = undo.z_key;
     history.pop_back();
+    accumulators.pop_back();
 }
 
 move16 Position::parseMove(std::string move_string) {

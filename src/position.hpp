@@ -49,6 +49,7 @@ class Position {
     MoveGenData movegen_data;
 
     std::vector<Undo> history;
+    std::vector<NN::Accumulator> accumulators;
 
     void readFen(std::string fen);
     std::string toFen();
