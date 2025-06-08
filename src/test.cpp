@@ -42,6 +42,16 @@ constexpr std::array TEST_POSITIONS = {
     "4r1k1/pq3p1p/2p1r1p1/2Q1p3/3nN1P1/1P6/P1P2P1P/3RR1K1 w - - "};
 
 void runTests() {
+    Position pos;
+
+    for (int i = 0; i < 16; i++) {
+        std::cout << pos.accumulators.back().values[WHITE][i] << "\n";
+        std::cout << pos.accumulators.back().values[BLACK][i] << "\n";
+    }
+
+
+
+
     // testMoveVerification();
     // testMovePicker();
     // testSee();
@@ -335,6 +345,9 @@ void testNN() {
     NN::Accumulator acc;
 
     pos.refreshAcc(acc);
+
+    acc.removePiece(WHITE_QUEEN, D1);
+    acc.addPiece(WHITE_QUEEN, D1);
 
     assert(NN::evaluate(acc, WHITE) == 58);
 
