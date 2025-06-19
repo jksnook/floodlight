@@ -11,29 +11,65 @@
 
 namespace Spotlight {
 
-DataEntry::DataEntry(Position& pos, int _score, int _result)
-    : score(_score), result(_result), side(pos.side_to_move) {
+DataEntry::DataEntry(Position& pos, int _score, int _result) {
     for (auto& p : pieces) {
         p = 0;
     }
 
-    occupancy = pos.bitboards[OCCUPANCY];
-    BitBoard temp = occupancy;
-    int pieces_idx = 0;
 
-    while (temp) {
-        Square sq = popLSB(temp);
+    if (pos.side_to_move == WHITE) {
 
-        pieces[pieces_idx / 2] |= (pos.at(sq) & 0b1111) << ((pieces_idx & 1) * 4);
-        pieces_idx++;
+        result = _result;
+        score = _score;
+
+        occupancy = pos.bitboards[OCCUPANCY];
+        BitBoard temp = occupancy;
+        int pieces_idx = 0;
+
+        while (temp) {
+            Square sq = popLSB(temp);
+
+            pieces[pieces_idx / 2] |= (pos.at(sq) & 0b1111) << ((pieces_idx & 1) * 4);
+            pieces_idx++;
+        }
+
+        ksq = bitScanForward(pos.bitboards[getPieceID(KING, pos.side_to_move)]);
+        opp_ksq = bitScanForward(pos.bitboards[getPieceID(KING, getOtherSide(pos.side_to_move))]);
+
+    } else {
+
+        occupancy = 0ULL;
+        int pieces_idx = 0;
+
+        result = 2 - _result;
+        score = -_score;
+
+        for (int rank = 7; rank >= 0; rank--) {
+            for (int file = 0; file < 8; file++) {
+                Square sq = static_cast<Square>(rank * 8 + file);
+                Piece p = pos.at(sq);
+                
+                if (p != NO_PIECE) {
+                    assert(pieces_idx < 32);
+                    Piece p_relative = FLIP_PIECE[p];
+                    pieces[pieces_idx / 2] = pieces[pieces_idx / 2] |= (p_relative & 0b1111) << ((pieces_idx & 1) * 4);;
+                    occupancy |= setBit(static_cast<int>(sq) ^ 56);
+                    pieces_idx++;
+                }
+            }
+        }
+
+        ksq = bitScanForward(pos.bitboards[BLACK_KING]) ^ 56;
+        opp_ksq = bitScanForward(pos.bitboards[WHITE_KING]) ^ 56;
+
     }
 
-    ksq = bitScanForward(pos.bitboards[getPieceID(KING, pos.side_to_move)]);
-    opp_ksq = bitScanForward(pos.bitboards[getPieceID(KING, getOtherSide(pos.side_to_move))]);
+    side = pos.side_to_move;
 
     for (auto& e : extra) {
         e = 0;
     }
+
 }
 
 void DataEntry::print() {
@@ -224,7 +260,7 @@ void playGames(int num_games, U64 node_count, int id, int& games_played, std::of
             int qscore = search.qScore(pos);
 
             if (eval_score == qscore && score < MATE_THRESHOLD && score > -MATE_THRESHOLD) {
-                entries.push_back(DataEntry(pos, eval_score, result));
+                entries.emplace_back(pos, eval_score, result);
             }
 
             pos.makeMove(move);
@@ -236,7 +272,12 @@ void playGames(int num_games, U64 node_count, int id, int& games_played, std::of
             // log positions to the output file
             std::cout << "positions written: " << entries.size() << "\n";
             for (auto& entry : entries) {
-                entry.result = result;
+                if (entry.side == WHITE) {
+                    entry.result = result;
+                } else {
+                    entry.result = 2 - result;
+                    entry.side = WHITE;
+                }
                 output_file.write(reinterpret_cast<char*>(&entry), sizeof(DataEntry));
             }
         }

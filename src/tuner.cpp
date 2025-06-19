@@ -247,6 +247,7 @@ void Tuner::run() {
         if (epoch % REPORT_INTERVAL == 0) {
             std::cout << "Epoch " << epoch << "/" << MAX_EPOCHS
                       << " Evaluation Error: " << evaluationError(k_param) << "\n";
+            printWeights();
         }
     }
 }

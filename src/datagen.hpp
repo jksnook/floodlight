@@ -34,7 +34,7 @@ inline std::string resultToString(int result) {
     return "";
 }
 
-// data entry format based on BulletFormat but not side relative
+// data entry format based on BulletFormat
 struct DataEntry {
     BitBoard occupancy;
     uint8_t pieces[16];

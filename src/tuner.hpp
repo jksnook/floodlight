@@ -11,13 +11,13 @@ https://github.com/AndyGrant/Ethereal/blob/master/Tuning.pdf
 
 namespace Spotlight {
 
-const size_t MAX_POSITIONS = 1500000;
+const size_t MAX_POSITIONS = 5000000;
 const int NUM_PARAMS = 64 * 6 * 2;
 const int PSQ_ARRAY_SIZE = NUM_PARAMS / 2;
 const int K_PRECISION = 10;
-const int MAX_EPOCHS = 20000;
+const int MAX_EPOCHS = 80000;
 const int REPORT_INTERVAL = 200;
-const double LEARNING_RATE = 0.20;
+const double LEARNING_RATE = 0.15;
 const std::string TUNING_FILE = "./selfplay";
 const std::string TUNING_PARAMS_FILE = "./piece_squares.txt";
 
