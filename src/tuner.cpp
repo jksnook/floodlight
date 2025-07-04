@@ -80,8 +80,8 @@ Tuner::Tuner() : weights{}, gradient{} {
         while (temp) {
             int i = popLSB(temp);
 
-            Piece piece = static_cast<Piece>(
-                (input_entry.pieces[pieces_idx / 2] >> ((pieces_idx & 1) * 4)) & 0b1111);
+            uint8_t bullet_piece = (input_entry.pieces[pieces_idx / 2] >> ((pieces_idx & 1) * 4)) & 0b1111;
+            Piece piece = static_cast<Piece>(bullet_piece < 6 ? bullet_piece : bullet_piece - 2);
 
             game_phase += phase_values[piece % 6];
             int coeff_idx;

@@ -29,7 +29,12 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
         while (temp) {
             Square sq = popLSB(temp);
 
-            pieces[pieces_idx / 2] |= (pos.at(sq) & 0b1111) << ((pieces_idx & 1) * 4);
+            Piece p = pos.at(sq);
+            uint8_t side = p >= 6;
+
+            uint8_t bullet_piece = (side << 3) | (p % 6);
+
+            pieces[pieces_idx / 2] |= bullet_piece << ((pieces_idx & 1) * 4);
             pieces_idx++;
         }
 
@@ -52,7 +57,9 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
                 if (p != NO_PIECE) {
                     assert(pieces_idx < 32);
                     Piece p_relative = FLIP_PIECE[p];
-                    pieces[pieces_idx / 2] = pieces[pieces_idx / 2] |= (p_relative & 0b1111) << ((pieces_idx & 1) * 4);;
+                    uint8_t side = p_relative >= 6;
+                    uint8_t bullet_piece = (side << 3) | (p_relative % 6);
+                    pieces[pieces_idx / 2] = pieces[pieces_idx / 2] |= bullet_piece << ((pieces_idx & 1) * 4);;
                     occupancy |= setBit(static_cast<int>(sq) ^ 56);
                     pieces_idx++;
                 }
@@ -207,24 +214,24 @@ void playGames(int num_games, U64 node_count, int id, int& games_played, std::of
 
             pos.makeMove(moves[random_index].move);
         }
-        pos.print();
+        // pos.print();
 
         // main game loop
         while (true) {
             // Check for draw conditions
             if (pos.fifty_move >= FIFTY_MOVE_LIMIT) {
                 std::cout << "Draw by fifty moves rule\n";
-                pos.print();
+                // pos.print();
                 result = 1;
                 break;
             } else if (pos.isTripleRepetition()) {
                 std::cout << "Draw by triple repetition\n";
-                pos.print();
+                // pos.print();
                 result = 1;
                 break;
             } else if (countBits(pos.bitboards[OCCUPANCY]) == 2) {
                 std::cout << "Draw by insufficient material\n";
-                pos.print();
+                // pos.print();
                 result = 1;
                 break;
             }
