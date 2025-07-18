@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     if (argc == 1) {
         UCI uci;
         uci.loop();
-    } else if (static_cast<std::string>(argv[1]) == "searchtest") {
+    } else if (static_cast<std::string>(argv[1]) == "bench") {
         testSearch();
     } else if (static_cast<std::string>(argv[1]) == "fulltest") {
         runTests();
