@@ -5,8 +5,11 @@
 namespace Spotlight {
 
 int eval(Position &pos) {
+    return NN::evaluate(pos.accumulators.back(), pos.side_to_move);
 
-    // return NN::evaluate(pos.accumulators.back(), pos.side_to_move);
+    // PSQT eval below (currently unused)
+
+    /*
 
     int early_eval = 0;
     int late_eval = 0;
@@ -41,6 +44,8 @@ int eval(Position &pos) {
     }
 
     return total_eval;
+
+    */
 }
 
 }  // namespace Spotlight

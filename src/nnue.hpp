@@ -11,7 +11,7 @@
 namespace Spotlight {
 
 const int INPUT_SIZE = 768;
-const int HIDDEN_SIZE = 64;
+const int HIDDEN_SIZE = 32;
 const int16_t QA = 255;
 const int16_t QB = 64;
 const int32_t EVAL_SCALE = 400;
@@ -20,13 +20,12 @@ namespace NN {
 
 template <Color side>
 int getIndex(Piece piece, Square sq) {
-    if constexpr(side == WHITE) {
+    if constexpr (side == WHITE) {
         return piece * 64 + sq;
     } else {
         return (getPieceType(piece) + 6 * getOtherSide(getPieceColor(piece))) * 64 + (sq ^ 56);
     }
 }
-
 
 struct Accumulator {
     void clear();

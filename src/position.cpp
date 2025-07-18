@@ -640,7 +640,6 @@ bool Position::zugzwangUnlikely() {
 }
 
 void Position::refreshAcc(NN::Accumulator &acc) {
-
     acc.clear();
 
     for (int i = 0; i < 64; i++) {

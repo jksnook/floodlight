@@ -7,11 +7,11 @@
 #include "move.hpp"
 #include "movegen.hpp"
 #include "movepicker.hpp"
+#include "nnue.hpp"
 #include "position.hpp"
 #include "search.hpp"
 #include "see.hpp"
 #include "utils.hpp"
-#include "nnue.hpp"
 
 namespace Spotlight {
 
@@ -48,9 +48,6 @@ void runTests() {
         std::cout << pos.accumulators.back().values[WHITE][i] << "\n";
         std::cout << pos.accumulators.back().values[BLACK][i] << "\n";
     }
-
-
-
 
     // testMoveVerification();
     // testMovePicker();
@@ -352,7 +349,7 @@ void testNN() {
     assert(NN::evaluate(acc, WHITE) == 58);
 
     pos.readFen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - ");
-    
+
     pos.refreshAcc(acc);
 
     assert(NN::evaluate(acc, WHITE) == -136);

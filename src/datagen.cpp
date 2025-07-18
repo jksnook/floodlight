@@ -16,9 +16,7 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
         p = 0;
     }
 
-
     if (pos.side_to_move == WHITE) {
-
         result = _result;
         score = _score;
 
@@ -42,7 +40,6 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
         opp_ksq = bitScanForward(pos.bitboards[getPieceID(KING, getOtherSide(pos.side_to_move))]);
 
     } else {
-
         occupancy = 0ULL;
         int pieces_idx = 0;
 
@@ -53,13 +50,15 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
             for (int file = 0; file < 8; file++) {
                 Square sq = static_cast<Square>(rank * 8 + file);
                 Piece p = pos.at(sq);
-                
+
                 if (p != NO_PIECE) {
                     assert(pieces_idx < 32);
                     Piece p_relative = FLIP_PIECE[p];
                     uint8_t side = p_relative >= 6;
                     uint8_t bullet_piece = (side << 3) | (p_relative % 6);
-                    pieces[pieces_idx / 2] = pieces[pieces_idx / 2] |= bullet_piece << ((pieces_idx & 1) * 4);;
+                    pieces[pieces_idx / 2] = pieces[pieces_idx / 2] |= bullet_piece
+                                                                       << ((pieces_idx & 1) * 4);
+                    ;
                     occupancy |= setBit(static_cast<int>(sq) ^ 56);
                     pieces_idx++;
                 }
@@ -68,7 +67,6 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
 
         ksq = bitScanForward(pos.bitboards[BLACK_KING]) ^ 56;
         opp_ksq = bitScanForward(pos.bitboards[WHITE_KING]) ^ 56;
-
     }
 
     side = pos.side_to_move;
@@ -76,7 +74,6 @@ DataEntry::DataEntry(Position& pos, int _score, int _result) {
     for (auto& e : extra) {
         e = 0;
     }
-
 }
 
 void DataEntry::print() {

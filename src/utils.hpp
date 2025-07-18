@@ -37,10 +37,9 @@ inline constexpr Color getPieceColor(Piece piece) {
     return static_cast<Color>(piece > Piece::WHITE_KING);
 }
 
-const Piece FLIP_PIECE[12] = {
-    BLACK_PAWN, BLACK_KNIGHT, BLACK_BISHOP, BLACK_ROOK, BLACK_QUEEN, BLACK_KING,
-    WHITE_PAWN, WHITE_KNIGHT, WHITE_BISHOP, WHITE_ROOK, WHITE_QUEEN, WHITE_KING
-};
+const Piece FLIP_PIECE[12] = {BLACK_PAWN,   BLACK_KNIGHT, BLACK_BISHOP, BLACK_ROOK,
+                              BLACK_QUEEN,  BLACK_KING,   WHITE_PAWN,   WHITE_KNIGHT,
+                              WHITE_BISHOP, WHITE_ROOK,   WHITE_QUEEN,  WHITE_KING};
 
 inline constexpr int getOccupancy(Color side) {
     if (side == Color::BLACK) {
