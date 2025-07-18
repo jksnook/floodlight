@@ -160,50 +160,35 @@ int evaluate(Accumulator& acc, Color side) {
 
     int32_t output = 0;
 
-    const __m256i QA_vector = _mm256_set1_epi32(QA);
+    const __m256i QA_vector = _mm256_set1_epi16(QA);
 
-    const __m256i zeros = _mm256_set1_epi32(0);
+    const __m256i zeros = _mm256_set1_epi16(0);
 
     __m256i sum = zeros;
 
-    for (int i = 0; i < HIDDEN_SIZE; i += 8) {
-        // load values and expand to 32 bits
-        __m128i a_short = _mm_loadu_si128((__m128i*)(&acc.values[side][i]));
-        __m256i a = _mm256_cvtepi16_epi32(a_short);
-        // __m256i a = _mm256_loadu_si256((__m256i*)(&acc.values[side][i]));
-
-        __m128i b_short = _mm_loadu_si128((__m128i*)(&acc.values[other_side][i]));
-        __m256i b = _mm256_cvtepi16_epi32(b_short);
-        // __m256i b = _mm256_loadu_si256((__m256i*)(&acc.values[other_side][i]));
+    for (int i = 0; i < HIDDEN_SIZE; i += 16) {
+        // load values
+        __m256i a = _mm256_loadu_si256((__m256i*)(&acc.values[side][i]));
+        __m256i b = _mm256_loadu_si256((__m256i*)(&acc.values[other_side][i]));
 
         // load weights
-        __m128i weights_a_i16 = _mm_loadu_si128((__m128i*)(&output_weights[i]));
-        __m256i weights_a = _mm256_cvtepi16_epi32(weights_a_i16);
-        // __m256i weights_a = _mm256_loadu_si256((__m256i*)(&output_weights[i]));
-
-        __m128i weights_b_i16 = _mm_loadu_si128((__m128i*)(&output_weights[HIDDEN_SIZE + i]));
-        __m256i weights_b = _mm256_cvtepi16_epi32(weights_b_i16);
-        // __m256i weights_b = _mm256_loadu_si256((__m256i*)(&output_weights[HIDDEN_SIZE + i]));
+        __m256i weights_a = _mm256_loadu_si256((__m256i*)(&output_weights[i]));
+        __m256i weights_b = _mm256_loadu_si256((__m256i*)(&output_weights[HIDDEN_SIZE + i]));
 
         // apply crelu
-        a = _mm256_min_epi32(a, QA_vector);
-        a = _mm256_max_epi32(a, zeros);
+        a = _mm256_min_epi16(a, QA_vector);
+        a = _mm256_max_epi16(a, zeros);
 
-        // square to get screlu
-        a = _mm256_mullo_epi32(a, a);
-
-        b = _mm256_min_epi32(b, QA_vector);
-        b = _mm256_max_epi32(b, zeros);
-
-        b = _mm256_mullo_epi32(b, b);
+        b = _mm256_min_epi16(b, QA_vector);
+        b = _mm256_max_epi16(b, zeros);
 
         // apply weights
-        a = _mm256_mullo_epi32(a, weights_a);
-        b = _mm256_mullo_epi32(b, weights_b);
+        __m256i a_w = _mm256_mullo_epi16(a, weights_a);
+        __m256i b_w = _mm256_mullo_epi16(b, weights_b);
 
-        // add to our vector sum
-        sum = _mm256_add_epi32(sum, a);
-        sum = _mm256_add_epi32(sum, b);
+        // multiply again to get screlu and add to our vector sum
+        sum = _mm256_add_epi32(sum, _mm256_madd_epi16(a, a_w));
+        sum = _mm256_add_epi32(sum, _mm256_madd_epi16(b, b_w));
     }
 
     sum = _mm256_hadd_epi32(sum, sum);

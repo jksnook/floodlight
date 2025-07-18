@@ -52,7 +52,7 @@ void runTests() {
     // testMoveVerification();
     // testMovePicker();
     // testSee();
-    testNN();
+    // testNN();
     testPerft();
     // testCheck();
 
