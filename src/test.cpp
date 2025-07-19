@@ -42,17 +42,10 @@ constexpr std::array TEST_POSITIONS = {
     "4r1k1/pq3p1p/2p1r1p1/2Q1p3/3nN1P1/1P6/P1P2P1P/3RR1K1 w - - "};
 
 void runTests() {
-    Position pos;
-
-    for (int i = 0; i < 16; i++) {
-        std::cout << pos.accumulators.back().values[WHITE][i] << "\n";
-        std::cout << pos.accumulators.back().values[BLACK][i] << "\n";
-    }
-
     // testMoveVerification();
     // testMovePicker();
     // testSee();
-    // testNN();
+    testNN();
     testPerft();
     // testCheck();
 
@@ -343,16 +336,22 @@ void testNN() {
 
     pos.refreshAcc(acc);
 
+    int before_eval = NN::evaluate(acc, WHITE);
+
     acc.removePiece(WHITE_QUEEN, D1);
     acc.addPiece(WHITE_QUEEN, D1);
 
-    assert(NN::evaluate(acc, WHITE) == 58);
+    int after_eval = NN::evaluate(acc, WHITE);
 
-    pos.readFen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - ");
+    assert(before_eval == after_eval);
+
+    pos.readFen("4k3/8/8/7N/1Q6/8/8/4K3 w - - 0 1");
 
     pos.refreshAcc(acc);
 
-    assert(NN::evaluate(acc, WHITE) == -136);
+    assert(NN::evaluate(acc, WHITE) > 0);
+
+    assert(NN::evaluate(acc, BLACK) < 0);
 }
 
 }  // namespace Spotlight
