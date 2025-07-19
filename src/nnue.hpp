@@ -11,7 +11,7 @@
 namespace Spotlight {
 
 const int INPUT_SIZE = 768;
-const int HIDDEN_SIZE = 64;
+const int HIDDEN_SIZE = 128;
 const int16_t QA = 255;
 const int16_t QB = 64;
 const int32_t EVAL_SCALE = 400;
