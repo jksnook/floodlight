@@ -5,7 +5,7 @@
 
 #include "test.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 UCI::UCI() : position(), search_threads(1) {}
 
@@ -22,7 +22,7 @@ void UCI::loop() {
         commands >> token;
 
         if (token == "uci") {
-            std::cout << "id name nnue-chess\n";
+            std::cout << "id name floodlight\n";
             std::cout << "id author github.com/jksnook\n";
             std::cout << "option name Threads type spin default 1 min 1 max 64\n";
             std::cout << "option name Hash type spin default 16 min 1 max 4096\n";
@@ -220,4 +220,4 @@ void UCI::parseSetOption(std::istringstream& commands) {
     }
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

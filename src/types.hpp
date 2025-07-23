@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace Spotlight {
+namespace Floodlight {
 
 using U64 = std::uint64_t;
 using BitBoard = std::uint64_t;
@@ -34,4 +34,4 @@ enum Square : uint16_t {
 };
 // clang-format on
 
-}  // namespace Spotlight
+}  // namespace Floodlight

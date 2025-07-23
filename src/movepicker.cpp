@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-namespace Spotlight {
+namespace Floodlight {
 
 MovePicker::MovePicker(Position &_pos, int (*_quiet_history)[2][64][64], move16 _tt_move,
                        move16 _killer_1, move16 _killer_2)
@@ -248,4 +248,4 @@ move16 MovePicker::getNextCapture() {
     return NULL_MOVE;
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

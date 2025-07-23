@@ -4,7 +4,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 // piece values
 
@@ -287,4 +287,4 @@ constexpr int piece_square_tables[6][2][64] = {
 
 int eval(Position &pos);
 
-}  // namespace Spotlight
+}  // namespace Floodlight

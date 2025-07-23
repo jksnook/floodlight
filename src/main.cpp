@@ -9,7 +9,7 @@
 #include "uci.hpp"
 #include "zobrist.hpp"
 
-using namespace Spotlight;
+using namespace Floodlight;
 
 int main(int argc, char* argv[]) {
     initMoves();

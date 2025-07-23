@@ -8,7 +8,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 const int HISTORY_DIVISOR = 1;
 const int TT_MOVE_SCORE = (1 << 30);
@@ -50,4 +50,4 @@ class MovePicker {
     void scoreNoisies();
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

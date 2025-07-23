@@ -1,6 +1,6 @@
 #include "movegen.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 BitBoard getEnemyAttacks(Position &pos, Square sq) {
     BitBoard attackers = 0ULL;
@@ -836,4 +836,4 @@ U64 perft(Position &pos, int depth) {
     return nodes;
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

@@ -4,7 +4,7 @@
 
 #include "types.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 U64 piece_keys[static_cast<int>(Piece::NO_PIECE) + 1][64];
 U64 en_passant_keys[64];
@@ -33,4 +33,4 @@ void initZobrist() {
     side_key = randomU64();
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

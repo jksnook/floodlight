@@ -8,7 +8,7 @@
 #include "utils.hpp"
 #include "zobrist.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 template <bool update_zobrist>
 void Position::movePiece(Square start, Square end, Piece piece) {
@@ -651,4 +651,4 @@ void Position::refreshAcc(NN::Accumulator &acc) {
     }
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

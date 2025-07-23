@@ -9,7 +9,7 @@
 #include "position.hpp"
 #include "search.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 class SearchWrapper {
    public:
@@ -56,4 +56,4 @@ class Threads {
     std::vector<std::thread> threads;
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

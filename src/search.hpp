@@ -12,7 +12,7 @@
 #include "tt.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 const int POSITIVE_INFINITY = 32000;
 const int NEGATIVE_INFINITY = -POSITIVE_INFINITY;
@@ -111,4 +111,4 @@ class Search {
     PVTable pv;
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

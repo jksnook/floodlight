@@ -8,7 +8,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 U64 getEnemyAttacks(Position &pos, Square sq);
 
@@ -42,4 +42,4 @@ U64 perftHelper(Position &pos, int depth);
 
 U64 perft(Position &pos, int depth);
 
-}  // namespace Spotlight
+}  // namespace Floodlight

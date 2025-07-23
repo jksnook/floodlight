@@ -6,7 +6,7 @@
 #include "nnue.hpp"
 #include "types.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 class MoveGenData {
    public:
@@ -81,4 +81,4 @@ class Position {
    private:
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

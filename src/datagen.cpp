@@ -9,7 +9,7 @@
 #include <thread>
 #include <vector>
 
-namespace Spotlight {
+namespace Floodlight {
 
 DataEntry::DataEntry(Position& pos, int _score, int _result) {
     for (auto& p : pieces) {
@@ -289,4 +289,4 @@ void playGames(int num_games, U64 node_count, int id, int& games_played, std::of
     }
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

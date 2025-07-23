@@ -17,7 +17,7 @@ Tuning implementation from Andrew Grant's tuning paper:
 https://github.com/AndyGrant/Ethereal/blob/master/Tuning.pdf
 */
 
-namespace Spotlight {
+namespace Floodlight {
 
 Tuner::Tuner() : weights{}, gradient{} {
     std::ifstream fen_file;
@@ -319,4 +319,4 @@ void Tuner::outputToFile() {
     out_file.close();
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

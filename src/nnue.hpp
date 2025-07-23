@@ -8,7 +8,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 const int INPUT_SIZE = 768;
 const int HIDDEN_SIZE = 128;
@@ -47,4 +47,4 @@ int evaluate(Accumulator &acc, Color side);
 
 };  // namespace NN
 
-}  // namespace Spotlight
+}  // namespace Floodlight

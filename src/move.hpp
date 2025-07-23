@@ -7,7 +7,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 /*
 Move encoding is with a 16 bit unsigned integer.
@@ -164,4 +164,4 @@ static inline void addMovesFromBitboard(Square start, BitBoard bb, move16 move_t
     }
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

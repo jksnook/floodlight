@@ -1,6 +1,6 @@
 #include "tt.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 TTEntry::TTEntry() : hash16(0ULL), depth(0), best_move(0), score(0), flags(0) {}
 
@@ -116,4 +116,4 @@ int TT::hashfull() {
     return n / BUCKET_SIZE;
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

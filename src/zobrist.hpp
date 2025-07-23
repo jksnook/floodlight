@@ -3,7 +3,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 extern U64 piece_keys[static_cast<int>(Piece::NO_PIECE) + 1][64];
 extern U64 en_passant_keys[64];
@@ -12,4 +12,4 @@ extern U64 side_key;
 
 void initZobrist();
 
-}  // namespace Spotlight
+}  // namespace Floodlight

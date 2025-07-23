@@ -7,7 +7,7 @@
 #include "types.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 // file masks
 static constexpr BitBoard A_FILE = 0x0101010101010101ULL;
@@ -264,4 +264,4 @@ BitBoard knightAttacksFromBitboard(BitBoard bitboard);
 BitBoard bishopAttacksFromBitboard(BitBoard bishops, BitBoard occupancy);
 BitBoard rookAttacksFromBitboard(BitBoard rooks, BitBoard occupancy);
 
-}  // namespace Spotlight
+}  // namespace Floodlight

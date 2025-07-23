@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace Spotlight {
+namespace Floodlight {
 
 std::string moveToString(move16 move) {
     std::string s = "";
@@ -35,4 +35,4 @@ void printMoveLong(move16 move) {
     std::cout << moveToString(move) << " " << moveTypeToString(move_type) << "\n";
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

@@ -2,7 +2,7 @@
 
 #include "bitboards.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 int eval(Position &pos) {
     return NN::evaluate(pos.accumulators.back(), pos.side_to_move);
@@ -48,4 +48,4 @@ int eval(Position &pos) {
     */
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

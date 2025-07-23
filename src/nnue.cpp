@@ -8,7 +8,7 @@
 
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 INCBIN(IncludedNetwork, "./src/net.bin");
 
@@ -232,4 +232,4 @@ int evaluate(Accumulator& acc, Color side) {
 
 }  // namespace NN
 
-}  // namespace Spotlight
+}  // namespace Floodlight

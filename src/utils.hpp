@@ -4,7 +4,7 @@
 
 #include "types.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 const uint8_t WHITE_OCCUPANCY = 12;
 const uint8_t BLACK_OCCUPANCY = 13;
@@ -101,4 +101,4 @@ inline constexpr Square prevPawnSquare(Square sq, Color side) {
 
 constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-}  // namespace Spotlight
+}  // namespace Floodlight

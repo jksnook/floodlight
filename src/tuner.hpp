@@ -9,7 +9,7 @@ Tuning implementation from Andrew Grant's tuning paper:
 https://github.com/AndyGrant/Ethereal/blob/master/Tuning.pdf
 */
 
-namespace Spotlight {
+namespace Floodlight {
 
 const size_t MAX_POSITIONS = 5000000;
 const int NUM_PARAMS = 64 * 6 * 2;
@@ -60,4 +60,4 @@ class Tuner {
    private:
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

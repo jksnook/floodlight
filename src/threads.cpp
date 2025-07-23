@@ -2,7 +2,7 @@
 
 #include "search.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 SearchWrapper::SearchWrapper(TT* _tt, std::atomic<bool>* _is_stopped,
                              std::function<U64()> _getNodes)
@@ -141,4 +141,4 @@ U64 Threads::getNodes() {
     return nodes;
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

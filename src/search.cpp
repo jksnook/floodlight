@@ -5,7 +5,7 @@
 
 #include "movepicker.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 // copy the pv from ply + 1 to ply and add the first move to the front
 void PVTable::updatePV(int ply, move16 first_move) {
@@ -713,4 +713,4 @@ int Search::qScore(Position &pos) {
     return qSearch(pos, 0, 0, NEGATIVE_INFINITY, POSITIVE_INFINITY);
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

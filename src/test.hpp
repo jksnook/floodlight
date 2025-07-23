@@ -8,7 +8,7 @@
 #include "position.hpp"
 #include "types.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 void runTests();
 
@@ -30,4 +30,4 @@ void testMoveVerification();
 
 void testNN();
 
-}  // namespace Spotlight
+}  // namespace Floodlight

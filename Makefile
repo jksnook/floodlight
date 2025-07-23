@@ -3,7 +3,7 @@ TARGET := nnue-chess
 TMPDIR := .tmp
 
 CXXFLAGS := -std=c++23 -O3 -march=native
-NAME := nnue-chess
+NAME := floodlight
 
 SOURCES := $(wildcard src/*.cpp)
 OBJECTS := $(patsubst %.cpp,$(TMPDIR)/%.o,$(SOURCES))

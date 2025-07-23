@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <vector>
 
-namespace Spotlight {
+namespace Floodlight {
 
 BitBoard getAttackersTo(Position &pos, int sq, BitBoard occupancy) {
     return ((knight_moves[sq] & (pos.bitboards[WHITE_KNIGHT] | pos.bitboards[BLACK_KNIGHT])) |
@@ -197,4 +197,4 @@ bool seeGe(Position &pos, move16 move, int margin) {
     return true;
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

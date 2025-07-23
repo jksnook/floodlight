@@ -13,7 +13,7 @@
 #include "see.hpp"
 #include "utils.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 constexpr std::array TEST_POSITIONS = {
     "r1b1kb1r/2pp1ppp/1np1q3/p3P3/2P5/1P6/PB1NQPPP/R3KB1R b KQkq - 0 1",
@@ -354,4 +354,4 @@ void testNN() {
     assert(NN::evaluate(acc, BLACK) < 0);
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

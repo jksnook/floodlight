@@ -9,7 +9,7 @@
 #include "search.hpp"
 #include "threads.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 class UCI {
    public:
@@ -25,4 +25,4 @@ class UCI {
     Threads search_threads;
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight

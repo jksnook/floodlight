@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace Spotlight {
+namespace Floodlight {
 
 // Reverse Bitscan from the chess programming wiki
 /**
@@ -380,4 +380,4 @@ BitBoard rookAttacksFromBitboard(BitBoard rooks, BitBoard occupancy) {
     return attacks;
 }
 
-}  // namespace Spotlight
+}  // namespace Floodlight

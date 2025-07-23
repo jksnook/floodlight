@@ -5,7 +5,7 @@
 #include "move.hpp"
 #include "types.hpp"
 
-namespace Spotlight {
+namespace Floodlight {
 
 const size_t TT_SIZE = 1024 * 1024 * 16;
 const int MAX_PLY = 100;
@@ -64,4 +64,4 @@ class TT {
     uint8_t generation;
 };
 
-}  // namespace Spotlight
+}  // namespace Floodlight
