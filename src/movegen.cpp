@@ -773,8 +773,6 @@ bool isLegal(move16 move, Position &pos) {
 }
 
 U64 perftHelper(Position &pos, int depth) {
-    NN::evaluate(pos.accumulators.back(), pos.side_to_move);
-
     if (depth == 0) {
         return 1;
     }
@@ -792,6 +790,7 @@ U64 perftHelper(Position &pos, int depth) {
         generateMovesSided<BLACK, QUIET>(moves, pos);
     }
 
+    // bulk counting disabled
     // if (depth == 1) {
     //     return moves.size();
     // }
@@ -807,7 +806,6 @@ U64 perftHelper(Position &pos, int depth) {
 
 U64 perft(Position &pos, int depth) {
     std::cout << "Bulk counting disabled\n";
-    NN::evaluate(pos.accumulators.back(), pos.side_to_move);
     if (depth == 0) {
         return 1;
     }

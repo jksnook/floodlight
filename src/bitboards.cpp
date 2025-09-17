@@ -302,13 +302,13 @@ void findBishopMagic(int index) {
 
     occupancy = 0ULL;
     for (occupancy_bits = 0ULL; occupancy_bits <= all_bits; occupancy_bits++) {
-        iterateOccupancy(occupancy, mask);
         attacks = generateBishopAttacks(index, occupancy);
         magic_index = (occupancy * magic_number) >> (64 - (bishop_relevant_bit_count[index]));
         // reliability check for magic number
         assert(bishop_magic_attacks[index][magic_index] == attacks ||
                bishop_magic_attacks[index][magic_index] == 0ULL);
         bishop_magic_attacks[index][magic_index] = attacks;
+        iterateOccupancy(occupancy, mask);
     }
 }
 
@@ -334,13 +334,13 @@ void findRookMagic(int index) {
     occupancy = 0ULL;
     // loop over all possible occupancies
     for (occupancy_bits = 0ULL; occupancy_bits <= all_bits; occupancy_bits++) {
-        iterateOccupancy(occupancy, mask);
         attacks = generateRookAttacks(index, occupancy);
         magic_index = (magic_number * occupancy) >> (64 - rook_relevant_bit_count[index]);
         // reliability check for magic numbers
         assert(rook_magic_attacks[index][magic_index] == attacks ||
                rook_magic_attacks[index][magic_index] == 0);
         rook_magic_attacks[index][magic_index] = attacks;
+        iterateOccupancy(occupancy, mask);
     }
 }
 
