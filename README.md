@@ -5,7 +5,7 @@ An NNUE Chess Engine derived from my previous piece-square table engine Spotligh
 
 ### Move generation
 * Fully legal move generation with magic bitboards
-* around 45 million nps in perft on my (mediocre) system without bulk counting
+* around 45 million nps in perft on my (mediocre) system without bulk counting (less now because of NNUE accumulator updates)
 
 ### Search:
 * Transposition Table
