@@ -1,9 +1,8 @@
 CXX := g++
-TARGET := nnue-chess
+TARGET := floodlight
 TMPDIR := .tmp
 
 CXXFLAGS := -std=c++23 -O3 -march=native
-NAME := floodlight
 
 SOURCES := $(wildcard src/*.cpp)
 OBJECTS := $(patsubst %.cpp,$(TMPDIR)/%.o,$(SOURCES))
@@ -16,7 +15,7 @@ debug: CXXFLAGS += -g -Wall
 debug: all
 
 $(TARGET): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $(NAME)
+	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)
 
 $(TMPDIR)/%.o: %.cpp Makefile | $(TMPDIR)
 	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@

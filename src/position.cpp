@@ -567,7 +567,7 @@ move16 Position::parseMove(std::string move_string) {
                     break;
             }
         }
-    } else if ((piece == WHITE_PAWN || piece == BLACK_PAWN) && (end == en_passant)) {
+    } else if (en_passant != A1 && (piece == WHITE_PAWN || piece == BLACK_PAWN) && (end == en_passant)) {
         move_type = EN_PASSANT_CAPTURE;
     } else if (piece == WHITE_PAWN && end == start + 16) {
         move_type = DOUBLE_PAWN_PUSH;
