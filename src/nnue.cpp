@@ -196,8 +196,6 @@ int evaluate(Accumulator& acc, Color side) {
 
     output = _mm256_extract_epi32(sum, 0) + _mm256_extract_epi32(sum, 4);
 
-    // std::cout << "raw eval: " << s << "\n";
-
     output += output_bias;
 
     output /= QA;
@@ -205,8 +203,6 @@ int evaluate(Accumulator& acc, Color side) {
     output *= EVAL_SCALE;
 
     output /= QA * QB;
-
-    // std::cout << output << "\n";
 
     return output;
 
