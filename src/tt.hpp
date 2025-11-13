@@ -7,11 +7,11 @@
 
 namespace Floodlight {
 
-const size_t TT_SIZE = 1024 * 1024 * 16;
-const int MAX_PLY = 100;
-const int MATE_SCORE = 30000;
-const int MATE_THRESHOLD = MATE_SCORE - MAX_PLY;
-const int BUCKET_SIZE = 3;
+constexpr size_t TT_SIZE = 1024 * 1024 * 16;
+constexpr int MAX_PLY = 100;
+constexpr int MATE_SCORE = 30000;
+constexpr int MATE_THRESHOLD = MATE_SCORE - MAX_PLY;
+constexpr int BUCKET_SIZE = 3;
 enum NodeType : uint8_t { NULL_NODE, EXACT_NODE, LOWER_BOUND_NODE, UPPER_BOUND_NODE };
 
 class TTEntry {

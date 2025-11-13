@@ -4,8 +4,6 @@
 
 namespace Floodlight {
 
-int eval(Position &pos) {
-    return NN::evaluate(pos.accumulators.back(), pos.side_to_move);
-}
+int eval(Position &pos) { return NN::evaluate(pos.accumulators.back(), pos.side_to_move); }
 
 }  // namespace Floodlight

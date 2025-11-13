@@ -50,10 +50,10 @@ inline constexpr int getOccupancy(Color side) {
 }
 
 // castle rights codes
-const int WQC = 1;
-const int WKC = 2;
-const int BQC = 4;
-const int BKC = 8;
+constexpr int WQC = 1;
+constexpr int WKC = 2;
+constexpr int BQC = 4;
+constexpr int BKC = 8;
 
 constexpr int charToCastleRights(char c) {
     switch (c) {

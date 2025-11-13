@@ -10,44 +10,43 @@
 namespace Floodlight {
 
 // file masks
-static constexpr BitBoard A_FILE = 0x0101010101010101ULL;
-static constexpr BitBoard B_FILE = A_FILE << 1;
-static constexpr BitBoard G_FILE = A_FILE << 6;
-static constexpr BitBoard H_FILE = A_FILE << 7;
-static constexpr BitBoard AB_FILE = A_FILE | B_FILE;
-static constexpr BitBoard GH_FILE = G_FILE | H_FILE;
-static constexpr BitBoard NOT_A_FILE = ~A_FILE;
-static constexpr BitBoard NOT_B_FILE = ~B_FILE;
-static constexpr BitBoard NOT_AB_FILE = ~AB_FILE;
-static constexpr BitBoard NOT_G_FILE = ~G_FILE;
-static constexpr BitBoard NOT_H_FILE = ~H_FILE;
-static constexpr BitBoard NOT_GH_FILE = ~GH_FILE;
+constexpr BitBoard A_FILE = 0x0101010101010101ULL;
+constexpr BitBoard B_FILE = A_FILE << 1;
+constexpr BitBoard G_FILE = A_FILE << 6;
+constexpr BitBoard H_FILE = A_FILE << 7;
+constexpr BitBoard AB_FILE = A_FILE | B_FILE;
+constexpr BitBoard GH_FILE = G_FILE | H_FILE;
+constexpr BitBoard NOT_A_FILE = ~A_FILE;
+constexpr BitBoard NOT_B_FILE = ~B_FILE;
+constexpr BitBoard NOT_AB_FILE = ~AB_FILE;
+constexpr BitBoard NOT_G_FILE = ~G_FILE;
+constexpr BitBoard NOT_H_FILE = ~H_FILE;
+constexpr BitBoard NOT_GH_FILE = ~GH_FILE;
 
 // rank masks
-static constexpr BitBoard RANK_1 = 0xffULL;
-static constexpr BitBoard RANK_2 = RANK_1 << 8;
-static constexpr BitBoard RANK_4 = RANK_1 << (8 * 3);
-static constexpr BitBoard RANK_5 = RANK_1 << (8 * 4);
-static constexpr BitBoard RANK_7 = RANK_1 << (8 * 6);
-static constexpr BitBoard RANK_8 = RANK_1 << (8 * 7);
-static constexpr BitBoard RANK_1_AND_2 = RANK_1 | RANK_2;
-static constexpr BitBoard RANK_7_AND_8 = RANK_7 | RANK_8;
-static constexpr BitBoard NOT_RANK_1 = ~RANK_1;
-static constexpr BitBoard NOR_RANK_2 = ~RANK_2;
-static constexpr BitBoard NOT_RANK_7 = ~RANK_7;
-static constexpr BitBoard NOT_RANK_8 = ~RANK_8;
-static constexpr BitBoard NOT_RANK_1_AND_2 = ~RANK_1_AND_2;
-static constexpr BitBoard NOT_RANK_7_AND_8 = ~RANK_7_AND_8;
-
+constexpr BitBoard RANK_1 = 0xffULL;
+constexpr BitBoard RANK_2 = RANK_1 << 8;
+constexpr BitBoard RANK_4 = RANK_1 << (8 * 3);
+constexpr BitBoard RANK_5 = RANK_1 << (8 * 4);
+constexpr BitBoard RANK_7 = RANK_1 << (8 * 6);
+constexpr BitBoard RANK_8 = RANK_1 << (8 * 7);
+constexpr BitBoard RANK_1_AND_2 = RANK_1 | RANK_2;
+constexpr BitBoard RANK_7_AND_8 = RANK_7 | RANK_8;
+constexpr BitBoard NOT_RANK_1 = ~RANK_1;
+constexpr BitBoard NOR_RANK_2 = ~RANK_2;
+constexpr BitBoard NOT_RANK_7 = ~RANK_7;
+constexpr BitBoard NOT_RANK_8 = ~RANK_8;
+constexpr BitBoard NOT_RANK_1_AND_2 = ~RANK_1_AND_2;
+constexpr BitBoard NOT_RANK_7_AND_8 = ~RANK_7_AND_8;
 // castle squares needed for move generation and validation
-const BitBoard WQC_SQUARES = 0b1110ULL;
-const BitBoard WQC_KING_SQUARES = 0b1100ULL;
-const BitBoard WKC_SQUARES = 0b1100000ULL;
-const BitBoard WKC_KING_SQUARES = 0b1100000ULL;
-const BitBoard BQC_SQUARES = 0b1110ULL << (8 * 7);
-const BitBoard BQC_KING_SQUARES = WQC_KING_SQUARES << (8 * 7);
-const BitBoard BKC_SQUARES = 0b1100000ULL << (8 * 7);
-const BitBoard BKC_KING_SQUARES = WKC_KING_SQUARES << (8 * 7);
+constexpr BitBoard WQC_SQUARES = 0b1110ULL;
+constexpr BitBoard WQC_KING_SQUARES = 0b1100ULL;
+constexpr BitBoard WKC_SQUARES = 0b1100000ULL;
+constexpr BitBoard WKC_KING_SQUARES = 0b1100000ULL;
+constexpr BitBoard BQC_SQUARES = 0b1110ULL << (8 * 7);
+constexpr BitBoard BQC_KING_SQUARES = WQC_KING_SQUARES << (8 * 7);
+constexpr BitBoard BKC_SQUARES = 0b1100000ULL << (8 * 7);
+constexpr BitBoard BKC_KING_SQUARES = WKC_KING_SQUARES << (8 * 7);
 
 inline constexpr BitBoard setBit(int bit) { return 1ULL << bit; }
 

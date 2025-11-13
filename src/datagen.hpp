@@ -9,11 +9,11 @@
 
 namespace Floodlight {
 
-const int NUM_THREADS = 12;
-const int FIFTY_MOVE_LIMIT = 20;
-const int MAX_RANDOM_MOVES = 15;
-const int MIN_RANDOM_MOVES = 5;
-const int BASE_NODE_COUNT = 5000;
+constexpr int NUM_THREADS = 12;
+constexpr int FIFTY_MOVE_LIMIT = 20;
+constexpr int MAX_RANDOM_MOVES = 15;
+constexpr int MIN_RANDOM_MOVES = 5;
+constexpr int BASE_NODE_COUNT = 5000;
 
 enum OutputType { FEN, BULLET };
 

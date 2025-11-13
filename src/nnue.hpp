@@ -10,11 +10,11 @@
 
 namespace Floodlight {
 
-const int INPUT_SIZE = 768;
-const int HIDDEN_SIZE = 128;
-const int16_t QA = 255;
-const int16_t QB = 64;
-const int32_t EVAL_SCALE = 400;
+constexpr int INPUT_SIZE = 768;
+constexpr int HIDDEN_SIZE = 128;
+constexpr int16_t QA = 255;
+constexpr int16_t QB = 64;
+constexpr int32_t EVAL_SCALE = 400;
 
 namespace NN {
 

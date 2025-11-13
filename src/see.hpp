@@ -8,9 +8,10 @@
 
 namespace Floodlight {
 
-const int SEE_VALUES[13] = {100, 300, 300, 500, 900, 100000, 100, 300, 300, 500, 900, 100000, 0};
-const int SEE_MARGIN = 50;
-const int SEE_MULTIPLIER = 1000;
+constexpr int SEE_MARGIN = 50;
+constexpr int SEE_MULTIPLIER = 1000;
+constexpr int SEE_VALUES[13] = {100, 300, 300, 500, 900,    100000, 100,
+                                300, 300, 500, 900, 100000, 0};
 
 BitBoard getAttackersTo(Position &pos, int sq, BitBoard occupancy);
 

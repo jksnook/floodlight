@@ -19,26 +19,26 @@ bits 12-15: move type
 */
 
 // move type codes
-const move16 QUIET_MOVE = 0;
-const move16 DOUBLE_PAWN_PUSH = 0b0001;
-const move16 CAPTURE_MOVE = 0b0100;
-const move16 KING_CASTLE = 0b0010;
-const move16 QUEEN_CASTLE = 0b0011;
-const move16 EN_PASSANT_CAPTURE = 0b0101;
-const move16 KNIGHT_PROMOTION = 0b1000;
-const move16 BISHOP_PROMOTION = 0b1001;
-const move16 ROOK_PROMOTION = 0b1010;
-const move16 QUEEN_PROMOTION = 0b1011;
-const move16 KNIGHT_PROMOTION_CAPTURE = 0b1100;
-const move16 BISHOP_PROMOTION_CAPTURE = 0b1101;
-const move16 ROOK_PROMOTION_CAPTURE = 0b1110;
-const move16 QUEEN_PROMOTION_CAPTURE = 0b1111;
-const move16 UNUSED_MOVE_TYPE_1 = 0b0110;
-const move16 UNUSED_MOVE_TYPE_2 = 0b0111;
+constexpr move16 QUIET_MOVE = 0;
+constexpr move16 DOUBLE_PAWN_PUSH = 0b0001;
+constexpr move16 CAPTURE_MOVE = 0b0100;
+constexpr move16 KING_CASTLE = 0b0010;
+constexpr move16 QUEEN_CASTLE = 0b0011;
+constexpr move16 EN_PASSANT_CAPTURE = 0b0101;
+constexpr move16 KNIGHT_PROMOTION = 0b1000;
+constexpr move16 BISHOP_PROMOTION = 0b1001;
+constexpr move16 ROOK_PROMOTION = 0b1010;
+constexpr move16 QUEEN_PROMOTION = 0b1011;
+constexpr move16 KNIGHT_PROMOTION_CAPTURE = 0b1100;
+constexpr move16 BISHOP_PROMOTION_CAPTURE = 0b1101;
+constexpr move16 ROOK_PROMOTION_CAPTURE = 0b1110;
+constexpr move16 QUEEN_PROMOTION_CAPTURE = 0b1111;
+constexpr move16 UNUSED_MOVE_TYPE_1 = 0b0110;
+constexpr move16 UNUSED_MOVE_TYPE_2 = 0b0111;
 
-const move16 PROMOTION_FLAG = 0b1000;
+constexpr move16 PROMOTION_FLAG = 0b1000;
 
-const move16 NULL_MOVE = 0;
+constexpr move16 NULL_MOVE = 0;
 
 constexpr std::string_view moveTypeToString(move16 move_type) {
     switch (move_type) {
