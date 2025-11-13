@@ -17,7 +17,6 @@ constexpr int KILLER_1_SCORE = MAX_HISTORY * 2 + 1;
 constexpr int KILLER_2_SCORE = MAX_HISTORY * 2;
 constexpr int IGNORE_MOVE = -(1 << 30);
 
-// TODO add stage for killer moves
 enum class PickerStage { TT_MOVE, GOOD_NOISY, KILLER_1, KILLER_2, QUIET_AND_BAD_NOISY, END };
 
 class MovePicker {
